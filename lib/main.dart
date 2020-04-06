@@ -21,8 +21,8 @@ class _CoronavirusNoBrasilState extends State<CoronavirusNoBrasil> {
       title: AppConstant.appName,
       initialRoute: AppConstant.splashScreen,
       routes: {
-        AppConstant.splashScreen: (context) => SplashScreen(),
-        //AppConstant.dashboardScreen: (context) => HomeNavigator(),
+        AppConstant.splashScreen: (context) => const SplashScreen(),
+        AppConstant.dashboardScreen: (context) => DashboardScreen(),
       },
     );
   }

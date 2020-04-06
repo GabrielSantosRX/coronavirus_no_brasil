@@ -1,5 +1,6 @@
 analyzer:
   exclude:
+    - Coronavirus_No_Brasil/lib/**/*.g.dart
     - build/**
     - test/**
     - test_driver/**

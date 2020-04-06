@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatefulWidget {
+class DashboardScreen extends StatefulWidget {
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardScreenState extends State<DashboardScreen> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Coronavirus no Brasil')),
-      body: Text('asdf'),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: const Text('Coronavirus no Brasil')),
+        body: const Text('asdf'),
+      );
 }

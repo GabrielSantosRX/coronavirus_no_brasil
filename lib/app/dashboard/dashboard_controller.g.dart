@@ -9,7 +9,7 @@ part of 'dashboard_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DashboardController on DashboardControllerBase, Store {
-  const _$counterAtom = Atom(name: 'DashboardControllerBase.counter');
+  final _$counterAtom = Atom(name: 'DashboardControllerBase.counter');
 
   @override
   int get counter {
@@ -26,23 +26,23 @@ mixin _$DashboardController on DashboardControllerBase, Store {
     }, _$counterAtom, name: '${_$counterAtom.name}_set');
   }
 
-  const _$DashboardControllerBaseActionController =
+  final _$DashboardControllerBaseActionController =
       ActionController(name: 'DashboardControllerBase');
 
   @override
   int increment() {
-    const _$actionInfo =
+    final _$actionInfo =
         _$DashboardControllerBaseActionController.startAction();
     try {
       return super.increment();
-    } constly {
+    } finally {
       _$DashboardControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
-    const string = 'counter: ${counter.toString()}';
+    final string = 'counter: ${counter.toString()}';
     return '{$string}';
   }
 }
