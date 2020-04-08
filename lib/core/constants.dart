@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppConstant {
-  //region colors
+class Constants {
+  // colors
   static const Color colorPrimary = Color(0xFFE11E3C);
   static const Color colorPageBg = Color(0xFFF8F8F8);
   static const Color colorHeading = Color(0xFF0A151F);
@@ -23,9 +23,7 @@ class AppConstant {
   static const Color colorBottomSheetItemHeader = Color(0xFF183148);
   static const Color colorBottomSheetDivider = Color(0xFFEEF0F2);
 
-  //endregion
-
-  //region fonts
+  // fonts
   static const double fontSizeCaption = 12;
   static const double fontSizeBody2 = 14;
   static const double fontSizeBody = 16;
@@ -35,9 +33,7 @@ class AppConstant {
   static const double fontSizeIdiomCardTitle = 18;
   static const double fontSizeIdiomCardContent = 12;
 
-  //endregion
-
-  //region strings
+  // strings
   static const String appName = 'Coronavirus No Brasil';
   static const String appDescription =
       'Contador de casos de Covid-19 no Brasil';
@@ -45,17 +41,18 @@ class AppConstant {
   static const String appLongRichDescription = '';
   static const String appLongDescription = '';
 
-  //endregion
-  //endregion
-
-  //region Page
+  // Screens
   static const String splashScreen = '/';
   static const String dashboardScreen = '/dashboard';
 
-  //endregion
-
-  //region Assets
+  // Assets
   static const String svgLogo = 'assets/logo_w.svg';
   static const String svgLogoRed = 'assets/logo_red.svg';
-//endregion
+
+  // Urls
+  static const String urlGitHubApi =
+      'https://api.github.com/repos/wcota/covid19br/commits?path=cases-brazil-cities.csv&page=1&per_page=1';
+
+  // region LocalCacha
+  static const cachedLastChange = 'CACHED_LAST_CHANGE';
 }

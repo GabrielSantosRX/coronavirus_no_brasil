@@ -1,6 +1,6 @@
-import 'package:coronavirus_no_brasil/app/app_constants.dart';
+import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/app/dashboard/dashboard_screen.dart';
-import 'package:coronavirus_no_brasil/app/splash_screen.dart';
+import 'package:coronavirus_no_brasil/app/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,11 +18,11 @@ class _CoronavirusNoBrasilState extends State<CoronavirusNoBrasil> {
       SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
     return MaterialApp(
-      title: AppConstant.appName,
-      initialRoute: AppConstant.splashScreen,
+      title: Constants.appName,
+      initialRoute: Constants.splashScreen,
       routes: {
-        AppConstant.splashScreen: (context) => const SplashScreen(),
-        AppConstant.dashboardScreen: (context) => DashboardScreen(),
+        Constants.splashScreen: (context) => const SplashScreen(),
+        Constants.dashboardScreen: (context) => DashboardScreen(),
       },
     );
   }

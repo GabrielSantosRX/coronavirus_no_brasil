@@ -1,4 +1,4 @@
-import 'package:coronavirus_no_brasil/app/app_constants.dart';
+import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +12,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void startTimeout() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppConstant.dashboardScreen);
+      Navigator.pushReplacementNamed(context, Constants.dashboardScreen);
     });
   }
 
@@ -38,12 +38,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 left: 50,
                 right: 50,
                 child: SvgPicture.asset(
-                  AppConstant.svgLogo,
+                  Constants.svgLogo,
                   height: 100,
                 ),
               ),
               Center(
-                  child: Text(AppConstant.appName,
+                  child: Text(Constants.appName,
                       style: Theme.of(context)
                           .textTheme
                           .body2
