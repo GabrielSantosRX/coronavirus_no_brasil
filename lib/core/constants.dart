@@ -52,8 +52,11 @@ class Constants {
   // Urls
   static const String urlGitHubApi =
       'https://api.github.com/repos/wcota/covid19br/commits?path=cases-brazil-cities.csv&page=1&per_page=1';
+  static const String urlGitHubCitiesCSV =
+      'https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities.csv';
 
   // region LocalCacha
   static const hiveBox = 'CORONAVIRUS_BRAZIL_BOX';
   static const cachedCitiesLastUpdate = 'CACHED_CITIES_LAST_UPDATE';
+  static const cachedCitiesCSV = 'CACHED_CITIES_CSV';
 }

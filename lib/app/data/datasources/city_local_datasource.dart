@@ -4,9 +4,10 @@ import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:meta/meta.dart';
 
 abstract class ICityLocalDataSource {
-  //Future<String> getCitiesCSV();
+  Future<String> getCitiesCSV();
   DateTime getLastUpdate();
   Future cacheLastUpdate(DateTime update);
+  Future cacheCitiesCSV(String csvRaw);
 }
 
 class CityLocalDataSource implements ICityLocalDataSource {
@@ -15,13 +16,16 @@ class CityLocalDataSource implements ICityLocalDataSource {
   CityLocalDataSource({@required this.box});
 
   @override
-  DateTime getLastUpdate() {
-    final result = box.get(Constants.cachedCitiesLastUpdate);
-
-    return result;
-  }
+  DateTime getLastUpdate() => box.get(Constants.cachedCitiesLastUpdate);
 
   @override
-  Future cacheLastUpdate(DateTime update) =>
+  Future cacheLastUpdate(DateTime update) async =>
       box.put(Constants.cachedCitiesLastUpdate, update);
+
+  @override
+  Future cacheCitiesCSV(String csvRaw) async =>
+      box.put(Constants.cachedCitiesCSV, csvRaw);
+
+  @override
+  Future<String> getCitiesCSV() => box.get(Constants.cachedCitiesCSV);
 }

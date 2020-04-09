@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
 mixin ICityRemoteDataSource {
-  //Future<String> getCitiesCSV();
-  Future<DateTime> getLastChangeOnCSV();
+  Future<String> getCitiesCSV();
+  Future<DateTime> getLastChange();
 }
 
 class CityRemoteDataSource implements ICityRemoteDataSource {
@@ -15,7 +15,7 @@ class CityRemoteDataSource implements ICityRemoteDataSource {
   CityRemoteDataSource({@required this.dio});
 
   @override
-  Future<DateTime> getLastChangeOnCSV() =>
+  Future<DateTime> getLastChange() =>
       _getLastCommitOnGitHub().then((r) => r.commit.committer.date);
 
   Future<CommitGitHubModel> _getLastCommitOnGitHub() async {
@@ -24,5 +24,14 @@ class CityRemoteDataSource implements ICityRemoteDataSource {
     if (response.statusCode != 200) throw ServerException();
 
     return CommitGitHubModel.fromJson(response.data[0]);
+  }
+
+  @override
+  Future<String> getCitiesCSV() async {
+    final response = await dio.get(Constants.urlGitHubCitiesCSV);
+
+    if (response.statusCode != 200) throw ServerException();
+
+    return response.data;
   }
 }

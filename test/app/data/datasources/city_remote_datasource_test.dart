@@ -24,9 +24,6 @@ void main() {
         .thenAnswer((_) async => ResponseBody.fromString(
               fixture('cases_brazil_cities.csv'),
               200,
-              headers: {
-                Headers.contentTypeHeader: [Headers.jsonContentType],
-              },
             ));
   }
 
@@ -53,9 +50,22 @@ void main() {
       // arrange
       setUpMockHttpClientGitHubCommitSuccess200();
       // act
-      final result = await dataSource.getLastChangeOnCSV();
+      final result = await dataSource.getLastChange();
       // assert
       expect(result, equals(DateTime.parse('2020-04-08T04:13:39Z')));
+    },
+  );
+
+  test(
+    '''must execute a GET request on a GitHub RAW and return the Cities CSV''',
+    () async {
+      // arrange
+      setUpMockHttpClientGitHubCityCSVSuccess200();
+      // act
+      final result = await dataSource.getCitiesCSV();
+      // assert
+      expect(result, isNotNull);
+      expect(result.isNotEmpty, true);
     },
   );
 }

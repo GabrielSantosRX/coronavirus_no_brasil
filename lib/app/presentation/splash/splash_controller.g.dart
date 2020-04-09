@@ -9,39 +9,33 @@ part of 'splash_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SplashController on SplashControllerBase, Store {
-  final _$statusAtom = Atom(name: 'SplashControllerBase.status');
+  final _$isDataLoadedAtom = Atom(name: 'SplashControllerBase.isDataLoaded');
 
   @override
-  String get status {
-    _$statusAtom.context.enforceReadPolicy(_$statusAtom);
-    _$statusAtom.reportObserved();
-    return super.status;
+  bool get isDataLoaded {
+    _$isDataLoadedAtom.context.enforceReadPolicy(_$isDataLoadedAtom);
+    _$isDataLoadedAtom.reportObserved();
+    return super.isDataLoaded;
   }
 
   @override
-  set status(String value) {
-    _$statusAtom.context.conditionallyRunInAction(() {
-      super.status = value;
-      _$statusAtom.reportChanged();
-    }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  set isDataLoaded(bool value) {
+    _$isDataLoadedAtom.context.conditionallyRunInAction(() {
+      super.isDataLoaded = value;
+      _$isDataLoadedAtom.reportChanged();
+    }, _$isDataLoadedAtom, name: '${_$isDataLoadedAtom.name}_set');
   }
 
-  final _$SplashControllerBaseActionController =
-      ActionController(name: 'SplashControllerBase');
+  final _$_updateDataAsyncAction = AsyncAction('_updateData');
 
   @override
-  dynamic updateData() {
-    final _$actionInfo = _$SplashControllerBaseActionController.startAction();
-    try {
-      return super.updateData();
-    } finally {
-      _$SplashControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> _updateData() {
+    return _$_updateDataAsyncAction.run(() => super._updateData());
   }
 
   @override
   String toString() {
-    final string = 'status: ${status.toString()}';
+    final string = 'isDataLoaded: ${isDataLoaded.toString()}';
     return '{$string}';
   }
 }

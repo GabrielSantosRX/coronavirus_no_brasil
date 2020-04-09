@@ -17,9 +17,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void startTimeout() {
+    //while (!controller.isDataLoaded) {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, Constants.dashboardScreen);
+      print('...');
     });
+    //}
+
+    Navigator.pushReplacementNamed(context, Constants.dashboardScreen);
   }
 
   SplashController controller = sl<SplashController>();
@@ -54,16 +58,17 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Observer(
-                        builder: (_) => Text(
-                            controller.status, // Text(Constants.appName,
-                            style: Theme.of(context)
-                                .textTheme
-                                .body2
-                                .copyWith(color: Colors.white))),
+                    Text(Constants.appName,
+                        style: Theme.of(context)
+                            .textTheme
+                            .body2
+                            .copyWith(color: Colors.white)),
                     const SizedBox(height: 21),
                     (Platform.isIOS)
-                        ? const CupertinoActivityIndicator()
+                        ? const CupertinoActivityIndicator(
+                            animating: true,
+                            radius: 23.45,
+                          )
                         : const CircularProgressIndicator(),
                   ],
                 ),
