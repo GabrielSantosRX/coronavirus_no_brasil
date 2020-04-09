@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:coronavirus_no_brasil/app/presentation/splash/splash_controller.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
+import 'package:coronavirus_no_brasil/injection_container.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,10 +22,12 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  SplashController controller = sl<SplashController>();
+
   @override
   void initState() {
     super.initState();
-    startTimeout();
+    //startTimeout();
   }
 
   @override
@@ -43,11 +51,23 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               Center(
-                  child: Text(Constants.appName,
-                      style: Theme.of(context)
-                          .textTheme
-                          .body2
-                          .copyWith(color: Colors.white))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Observer(
+                        builder: (_) => Text(
+                            controller.status, // Text(Constants.appName,
+                            style: Theme.of(context)
+                                .textTheme
+                                .body2
+                                .copyWith(color: Colors.white))),
+                    const SizedBox(height: 21),
+                    (Platform.isIOS)
+                        ? const CupertinoActivityIndicator()
+                        : const CircularProgressIndicator(),
+                  ],
+                ),
+              ),
             ],
           )));
 }

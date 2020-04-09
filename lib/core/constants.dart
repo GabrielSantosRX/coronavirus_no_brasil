@@ -54,5 +54,6 @@ class Constants {
       'https://api.github.com/repos/wcota/covid19br/commits?path=cases-brazil-cities.csv&page=1&per_page=1';
 
   // region LocalCacha
-  static const cachedLastChange = 'CACHED_LAST_CHANGE';
+  static const hiveBox = 'CORONAVIRUS_BRAZIL_BOX';
+  static const cachedCitiesLastUpdate = 'CACHED_CITIES_LAST_UPDATE';
 }

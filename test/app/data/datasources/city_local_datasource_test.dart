@@ -1,4 +1,4 @@
-import 'package:coronavirus_no_brasil/app/dashboard/datasources/city_local_datasource.dart';
+import 'package:coronavirus_no_brasil/app/data/datasources/city_local_datasource.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/exceptions.dart';
 import 'package:hive/hive.dart';
@@ -27,9 +27,9 @@ void main() {
         final mockLastDate = DateTime.now();
         when(mockBox.get(any)).thenReturn(mockLastDate);
         // act
-        final result = await dataSource.getLastChangeOnCSV();
+        final result = dataSource.getLastUpdate();
         // assert
-        verify(mockBox.get(Constants.cachedLastChange));
+        verify(mockBox.get(Constants.cachedCitiesLastUpdate));
         expect(result, equals(mockLastDate));
       },
     );
@@ -40,9 +40,9 @@ void main() {
         // arrange
         when(mockBox.get(any)).thenReturn(null);
         // act
-        final call = dataSource.getLastChangeOnCSV;
+        final call = dataSource.getLastUpdate;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+        expect(call, throwsA(const TypeMatcher<CacheException>()));
       },
     );
   });

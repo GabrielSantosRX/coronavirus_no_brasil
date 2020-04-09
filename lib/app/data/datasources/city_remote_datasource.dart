@@ -1,11 +1,11 @@
-import 'package:coronavirus_no_brasil/core/commit_github.dart';
+import 'package:coronavirus_no_brasil/app/domain/models/commit_github_model.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/exceptions.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
-abstract class ICityRemoteDataSource {
-  Future<String> getCitiesCSV();
+mixin ICityRemoteDataSource {
+  //Future<String> getCitiesCSV();
   Future<DateTime> getLastChangeOnCSV();
 }
 
@@ -15,19 +15,14 @@ class CityRemoteDataSource implements ICityRemoteDataSource {
   CityRemoteDataSource({@required this.dio});
 
   @override
-  Future<String> getCitiesCSV() async {
-    return await '';
-  }
-
-  @override
   Future<DateTime> getLastChangeOnCSV() =>
       _getLastCommitOnGitHub().then((r) => r.commit.committer.date);
 
-  Future<CommitGitHub> _getLastCommitOnGitHub() async {
+  Future<CommitGitHubModel> _getLastCommitOnGitHub() async {
     final response = await dio.get(Constants.urlGitHubApi);
 
     if (response.statusCode != 200) throw ServerException();
 
-    return CommitGitHub.fromJson(response.data[0]);
+    return CommitGitHubModel.fromJson(response.data[0]);
   }
 }

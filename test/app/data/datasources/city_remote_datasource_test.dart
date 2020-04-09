@@ -1,7 +1,4 @@
-import 'dart:convert';
-
-import 'package:coronavirus_no_brasil/app/dashboard/datasources/city_remote_datasource.dart';
-import 'package:coronavirus_no_brasil/core/commit_github.dart';
+import 'package:coronavirus_no_brasil/app/data/datasources/city_remote_datasource.dart';
 import 'package:dio/dio.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
