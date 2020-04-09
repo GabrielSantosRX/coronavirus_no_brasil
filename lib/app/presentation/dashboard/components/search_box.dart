@@ -22,7 +22,7 @@ class SearchBox extends StatelessWidget {
       duration: Duration(milliseconds: !isKeyboardVisible ? 220 : 0),
       top: isKeyboardVisible
           ? searchBoxScrollPosition
-          : ScreenUtil.getHeight(context) * .35 - 26,
+          : ScreenUtil.getHeight(context) * .25 - 26,
       left: 0,
       right: 0,
       child: AnimatedOpacity(
