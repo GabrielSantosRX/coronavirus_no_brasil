@@ -27,7 +27,7 @@ class CityRepository implements ICityRepository {
   Future<bool> get checkRequiredUpdate async {
     final lastUpdate = localDataSource.getLastUpdate();
     final lastChange = await remoteDataSource.getLastChange();
-
+    print('Last Update: $lastUpdate');
     return null == lastUpdate || lastUpdate.isBefore(lastChange);
   }
 
@@ -38,10 +38,13 @@ class CityRepository implements ICityRepository {
 
     String csvRaw;
     if (isConnected && isRequiredUpdate) {
+      print('is online');
       csvRaw = await remoteDataSource.getCitiesCSV();
       await localDataSource.cacheCitiesCSV(csvRaw);
+      await localDataSource.cacheLastUpdate(DateTime.now());
     } else {
-      csvRaw = await localDataSource.getCitiesCSV();
+      print('is cached');
+      csvRaw = localDataSource.getCitiesCSV();
     }
 
     final rows = const CsvToListConverter().convert(

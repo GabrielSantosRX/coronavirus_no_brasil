@@ -1,4 +1,5 @@
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_screen.dart';
+import 'package:coronavirus_no_brasil/app/presentation/startup_navigator/startup_navigator.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +28,8 @@ class _CoronavirusNoBrasilState extends State<CoronavirusNoBrasil> {
       title: Constants.appName,
       initialRoute: Constants.splashScreen,
       routes: {
-        Constants.splashScreen: (context) => const SplashScreen(),
+        Constants.splashScreen: (context) => SplashScreen(),
+        Constants.startupNavigator: (context) => StartupNavigator(),
         Constants.dashboardScreen: (context) => DashboardScreen(),
       },
     );

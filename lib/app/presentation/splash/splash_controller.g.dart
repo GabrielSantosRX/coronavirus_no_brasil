@@ -26,6 +26,23 @@ mixin _$SplashController on SplashControllerBase, Store {
     }, _$isDataLoadedAtom, name: '${_$isDataLoadedAtom.name}_set');
   }
 
+  final _$statusAtom = Atom(name: 'SplashControllerBase.status');
+
+  @override
+  String get status {
+    _$statusAtom.context.enforceReadPolicy(_$statusAtom);
+    _$statusAtom.reportObserved();
+    return super.status;
+  }
+
+  @override
+  set status(String value) {
+    _$statusAtom.context.conditionallyRunInAction(() {
+      super.status = value;
+      _$statusAtom.reportChanged();
+    }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  }
+
   final _$_updateDataAsyncAction = AsyncAction('_updateData');
 
   @override
@@ -35,7 +52,8 @@ mixin _$SplashController on SplashControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'isDataLoaded: ${isDataLoaded.toString()}';
+    final string =
+        'isDataLoaded: ${isDataLoaded.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

@@ -43,11 +43,13 @@ class Constants {
 
   // Screens
   static const String splashScreen = '/';
+  static const String startupNavigator = '/startup';
   static const String dashboardScreen = '/dashboard';
 
   // Assets
   static const String svgLogo = 'assets/logo_w.svg';
-  static const String svgLogoRed = 'assets/logo_red.svg';
+  static const String svgLogoName = 'assets/logo_name.svg';
+  //static const String svgLogoRed = 'assets/logo_red.svg';
 
   // Urls
   static const String urlGitHubApi =

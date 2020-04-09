@@ -12,6 +12,9 @@ abstract class SplashControllerBase with Store {
   @observable
   bool isDataLoaded = false;
 
+  @observable
+  String status = 'Inicializando';
+
   List<CityModel> cities = <CityModel>[];
 
   SplashControllerBase(this.cityRepository) {
@@ -20,7 +23,9 @@ abstract class SplashControllerBase with Store {
 
   @action
   Future<void> _updateData() async {
+    status = 'Atulizandos dados das cidades';
     cities = await cityRepository.getCitiesUpdated();
+    status = 'Dados Atualizados!';
     isDataLoaded = true;
   }
 }
