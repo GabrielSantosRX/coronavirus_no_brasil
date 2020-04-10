@@ -1,5 +1,5 @@
 import 'package:coronavirus_no_brasil/app/data/repositories/city_repository.dart';
-import 'package:coronavirus_no_brasil/app/domain/models/city.dart';
+import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'splash_controller.g.dart';
@@ -15,7 +15,7 @@ abstract class SplashControllerBase with Store {
   @observable
   String status = 'Inicializando';
 
-  List<CityModel> cities = <CityModel>[];
+  List<CityModel> citiesList = <CityModel>[];
 
   SplashControllerBase(this.cityRepository) {
     _updateData();
@@ -24,7 +24,7 @@ abstract class SplashControllerBase with Store {
   @action
   Future<void> _updateData() async {
     status = 'Atulizandos dados das cidades';
-    cities = await cityRepository.getCitiesUpdated();
+    citiesList = await cityRepository.getCitiesUpdated();
     status = 'Dados Atualizados!';
     isDataLoaded = true;
   }

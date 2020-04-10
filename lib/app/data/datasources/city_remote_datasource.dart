@@ -1,4 +1,4 @@
-import 'package:coronavirus_no_brasil/app/domain/models/commit_github_model.dart';
+import 'package:coronavirus_no_brasil/app/models/commit_github_model.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/exceptions.dart';
 import 'package:dio/dio.dart';

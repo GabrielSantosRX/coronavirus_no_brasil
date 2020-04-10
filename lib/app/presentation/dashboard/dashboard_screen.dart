@@ -1,3 +1,4 @@
+import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/components/cover.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/components/search_box.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/views/city_data_view.dart';
@@ -6,8 +7,13 @@ import 'package:coronavirus_no_brasil/core/system_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
+import 'package:mobx/mobx.dart';
 
 class DashboardScreen extends StatefulWidget {
+  final List<CityModel> citiesList;
+
+  const DashboardScreen({Key key, this.citiesList}) : super(key: key);
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -18,6 +24,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   double _searchBoxScrollPosition = 40;
   final FocusNode _searchFn = FocusNode();
   ScrollController _scrollController;
+
+  List<CityModel> _citiesList;
 
   @override
   void initState() {
@@ -38,38 +46,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayHelper.statusBarBrightness(
-            isKeyboardVisible: _isKeyboardVisible),
-        child: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Cover(
-                    isKeyboardVisible: _isKeyboardVisible,
-                    context: context,
-                    scale: 0.25),
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: _isKeyboardVisible ? 102 : 52, bottom: 32),
-                      child: _isKeyboardVisible
-                          ? SearchScreen()
-                          : const CityDataView(),
-                    ),
+  Widget build(BuildContext context) {
+    _citiesList = widget.citiesList;
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayHelper.statusBarBrightness(
+          isKeyboardVisible: _isKeyboardVisible),
+      child: Stack(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Cover(
+                  isKeyboardVisible: _isKeyboardVisible,
+                  context: context,
+                  scale: 0.25),
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: _isKeyboardVisible ? 102 : 52, bottom: 32),
+                    child: _isKeyboardVisible
+                        ? SearchScreen(citiesList: _citiesList)
+                        : const CityDataView(),
                   ),
                 ),
-              ],
-            ),
-            SearchBox(
-              isKeyboardVisible: _isKeyboardVisible,
-              focusNode: _searchFn,
-              isScrollSearchBody: _isScrollSearchBody,
-              searchBoxScrollPosition: _searchBoxScrollPosition,
-            ),
-          ],
-        ),
-      );
+              ),
+            ],
+          ),
+          SearchBox(
+            isKeyboardVisible: _isKeyboardVisible,
+            focusNode: _searchFn,
+            isScrollSearchBody: _isScrollSearchBody,
+            searchBoxScrollPosition: _searchBoxScrollPosition,
+          ),
+        ],
+      ),
+    );
+  }
 }

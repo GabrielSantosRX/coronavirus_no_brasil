@@ -1,6 +1,6 @@
 import 'package:coronavirus_no_brasil/app/data/datasources/city_local_datasource.dart';
 import 'package:coronavirus_no_brasil/app/data/datasources/city_remote_datasource.dart';
-import 'package:coronavirus_no_brasil/app/domain/models/city.dart';
+import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/core/connectivity.dart';
 import 'package:csv/csv.dart';
 import 'package:csv/csv_settings_autodetection.dart';

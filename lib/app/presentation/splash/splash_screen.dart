@@ -22,8 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     reaction<bool>(
       (x) => controller.isDataLoaded,
-      (result) => Navigator.of(context)
-          .pushReplacementNamed(Constants.startupNavigator),
+      (result) => Navigator.of(context).pushReplacementNamed(
+          Constants.startupNavigator,
+          arguments: controller.citiesList),
     );
 
     super.initState();

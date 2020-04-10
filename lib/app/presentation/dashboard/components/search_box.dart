@@ -3,31 +3,41 @@ import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/screen_util.dart';
 import 'package:flutter/material.dart';
 
-class SearchBox extends StatelessWidget {
+class SearchBox extends StatefulWidget {
   final bool isKeyboardVisible;
   final bool isScrollSearchBody;
   final double searchBoxScrollPosition;
   final FocusNode focusNode;
 
-  const SearchBox(
+  SearchBox(
       {this.isKeyboardVisible,
       this.focusNode,
       this.isScrollSearchBody,
       this.searchBoxScrollPosition});
 
   @override
+  _SearchBoxState createState() => _SearchBoxState();
+}
+
+class _SearchBoxState extends State<SearchBox> {
+  @override
   Widget build(BuildContext context) {
     final searchController = TextEditingController();
+    searchController.addListener(() {
+      final text = searchController.text.toLowerCase();
+      print(text);
+    });
     return AnimatedPositioned(
-      duration: Duration(milliseconds: !isKeyboardVisible ? 220 : 0),
-      top: isKeyboardVisible
-          ? searchBoxScrollPosition
+      duration: Duration(milliseconds: !widget.isKeyboardVisible ? 220 : 0),
+      top: widget.isKeyboardVisible
+          ? widget.searchBoxScrollPosition
           : ScreenUtil.getHeight(context) * .25 - 26,
       left: 0,
       right: 0,
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 220),
-        opacity: !isScrollSearchBody && isKeyboardVisible ? 0.0 : 1.0,
+        opacity:
+            !widget.isScrollSearchBody && widget.isKeyboardVisible ? 0.0 : 1.0,
         child: Row(
           children: <Widget>[
             Flexible(
@@ -38,11 +48,11 @@ class SearchBox extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                        color: isKeyboardVisible
+                        color: widget.isKeyboardVisible
                             ? const Color(0xFFF3A5B1)
                             : Colors.transparent),
                     boxShadow: [
-                      !isKeyboardVisible
+                      !widget.isKeyboardVisible
                           ? BoxShadow(
                               color: Colors.grey.withOpacity(0.1),
                               blurRadius: 5,
@@ -61,7 +71,7 @@ class SearchBox extends StatelessWidget {
                     children: <Widget>[
                       Flexible(
                         child: TextFormField(
-                          focusNode: focusNode,
+                          focusNode: widget.focusNode,
                           controller: searchController,
                           decoration: InputDecoration(
                             hintText: 'Digite aqui a sua cidade...',
@@ -94,7 +104,7 @@ class SearchBox extends StatelessWidget {
                           ),
                         ),
                       ),
-                      isKeyboardVisible
+                      widget.isKeyboardVisible
                           ? IconButton(
                               icon: Icon(
                                 Icons.close,
@@ -111,9 +121,9 @@ class SearchBox extends StatelessWidget {
                 ),
               ),
             ),
-            isKeyboardVisible
+            widget.isKeyboardVisible
                 ? AnimatedOpacity(
-                    opacity: !isKeyboardVisible ? 0.0 : 1.0,
+                    opacity: !widget.isKeyboardVisible ? 0.0 : 1.0,
                     duration: const Duration(milliseconds: 1000),
                     child: Container(
                       margin: const EdgeInsets.only(right: 16),
