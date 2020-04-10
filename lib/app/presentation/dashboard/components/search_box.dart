@@ -49,6 +49,7 @@ class _SearchBoxState extends State<SearchBox> {
                         onTap: () {
                           searchController.text = '';
                           _dashboardController.searchText = '';
+                          print('cancel');
                           FocusScope.of(context).requestFocus(FocusNode());
                         },
                         child: Center(
@@ -121,6 +122,7 @@ class _SearchBoxState extends State<SearchBox> {
                                 size: 20,
                               ),
                               onPressed: () {
+                                print('clean');
                                 searchController.text = '';
                                 _dashboardController.searchText = '';
                               },

@@ -45,6 +45,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _isKeyboardVisible = _searchFn.hasFocus;
       });
     });
+
+    //reaction((_) => _searchFn.hasFocus, (bool hasFocus) => _dashboardController.isKeyboardVisible = hasFocus);
     super.initState();
   }
 

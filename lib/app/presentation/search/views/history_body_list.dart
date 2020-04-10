@@ -2,9 +2,7 @@ import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/injection_container.dart';
-import 'package:coronavirus_no_brasil/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
 class HistoryBodyList extends StatefulWidget {
@@ -53,7 +51,7 @@ class _HistoryBodyListState extends State<HistoryBodyList> {
                     child: ListTile(
                       leading: CircleAvatar(
                         child: Text(widget.citiesList[index].state),
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.red[600],
                         foregroundColor: Colors.white,
                       ),
                       title: Text(
@@ -66,6 +64,7 @@ class _HistoryBodyListState extends State<HistoryBodyList> {
                         print('selected ${widget.citiesList[index]}');
                         _dashboardController.searchText = widget.citiesList[index].cityQuery;
                         _dashboardController.citySelected = widget.citiesList[index];
+                        FocusScope.of(context).requestFocus(FocusNode());
                       },
                     ),
                   ),

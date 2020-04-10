@@ -12,26 +12,20 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool isKeyboardVisible = false;
-
   @override
-  Widget build(BuildContext context) {
-    final _citiesList = widget.citiesList;
-
-    return FadeAnimation(
-      0.3,
-      Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              const SizedBox(height: 16),
-              HistoryBodyList(
-                citiesList: _citiesList,
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => FadeAnimation(
+        0.3,
+        Stack(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                const SizedBox(height: 16),
+                HistoryBodyList(
+                  citiesList: widget.citiesList,
+                )
+              ],
+            )
+          ],
+        ),
+      );
 }
