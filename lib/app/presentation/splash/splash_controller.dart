@@ -23,7 +23,7 @@ abstract class SplashControllerBase with Store {
 
   @action
   Future<void> _updateData() async {
-    status = 'Atulizandos dados das cidades';
+    status = 'Atualizando dados...';
     citiesList = await cityRepository.getCitiesUpdated();
     status = 'Dados Atualizados!';
     isDataLoaded = true;

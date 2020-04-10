@@ -1,10 +1,11 @@
+import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class CityDataView extends StatelessWidget {
-  const CityDataView({
-    Key key,
-  }) : super(key: key);
+  final CityModel city;
+
+  const CityDataView({Key key, this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -15,7 +16,7 @@ class CityDataView extends StatelessWidget {
             Row(
               children: <Widget>[
                 Text(
-                  'Casos confirmados:',
+                  'Casos confirmados: $city',
                   style: TextStyle(color: Constants.colorProverbsIdiomsText),
                 ),
               ],

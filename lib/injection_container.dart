@@ -1,3 +1,4 @@
+import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:coronavirus_no_brasil/app/data/datasources/city_local_datasource.dart';
 import 'package:coronavirus_no_brasil/app/data/datasources/city_remote_datasource.dart';
@@ -46,4 +47,5 @@ Future<void> init() async {
   //! Features
   // Controllers
   getIt.registerLazySingleton(() => SplashController(getIt<ICityRepository>()));
+  getIt.registerLazySingleton(() => DashboardController());
 }
