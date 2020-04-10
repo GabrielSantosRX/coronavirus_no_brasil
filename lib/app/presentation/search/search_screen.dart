@@ -13,21 +13,19 @@ class _SearchScreenState extends State<SearchScreen> {
   bool isKeyboardVisible = false;
 
   @override
-  Widget build(BuildContext context) {
-    return FadeAnimation(
-      0.3,
-      Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              const SizedBox(height: 16),
-              HistoryBodyList(
-                historyWord: 'teste',
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => FadeAnimation(
+        0.3,
+        Stack(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                const SizedBox(height: 16),
+                HistoryBodyList(
+                  historyWord: 'teste',
+                )
+              ],
+            )
+          ],
+        ),
+      );
 }

@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class CityModel implements Equatable {
+class CityModel {
   String country;
   String state;
   String city;
@@ -24,10 +22,4 @@ class CityModel implements Equatable {
         deaths: row[4],
         totalCases: row[5],
       );
-
-  @override
-  List<Object> get props => [country, state, city, ibgeID, deaths, totalCases];
-
-  @override
-  bool get stringify => true;
 }

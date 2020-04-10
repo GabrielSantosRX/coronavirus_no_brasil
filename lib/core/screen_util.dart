@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ScreenUtil {
-  static getSize(context) {
-    return MediaQuery.of(context).size;
-  }
+  static Size getSize(BuildContext context) => MediaQuery.of(context).size;
 
-  static getWidth(context) {
-    return MediaQuery.of(context).size.width;
-  }
+  static double getWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 
-  static getHeight(context) {
-    return MediaQuery.of(context).size.height;
-  }
+  static double getHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height;
 
-  static divideHeight(context, {divided = 1}) {
-    return MediaQuery.of(context).size.height / divided;
-  }
+  static double divideHeight(BuildContext context, {int divided = 1}) =>
+      MediaQuery.of(context).size.height / divided;
 
-  static divideWidth(context, {divided = 1}) {
-    return MediaQuery.of(context).size.width / divided;
-  }
+  static double divideWidth(BuildContext context, {int divided = 1}) =>
+      MediaQuery.of(context).size.width / divided;
 }

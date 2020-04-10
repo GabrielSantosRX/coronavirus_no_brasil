@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:coronavirus_no_brasil/app/data/datasources/city_local_datasource.dart';
 import 'package:coronavirus_no_brasil/app/data/datasources/city_remote_datasource.dart';
@@ -12,40 +10,40 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
-final GetIt sl = GetIt.instance;
+final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
   // Repository
-  sl.registerLazySingleton<ICityRepository>(
+  getIt.registerLazySingleton<ICityRepository>(
     () => CityRepository(
-      remoteDataSource: sl<ICityRemoteDataSource>(),
-      localDataSource: sl<ICityLocalDataSource>(),
-      connectivity: sl<IConnectivity>(),
+      remoteDataSource: getIt<ICityRemoteDataSource>(),
+      localDataSource: getIt<ICityLocalDataSource>(),
+      connectivity: getIt<IConnectivity>(),
     ),
   );
 
   // Data sources
-  sl.registerLazySingleton<ICityRemoteDataSource>(
-    () => CityRemoteDataSource(dio: sl<Dio>()),
+  getIt.registerLazySingleton<ICityRemoteDataSource>(
+    () => CityRemoteDataSource(dio: getIt<Dio>()),
   );
 
-  sl.registerLazySingleton<ICityLocalDataSource>(
-    () => CityLocalDataSource(box: sl<Box>()),
+  getIt.registerLazySingleton<ICityLocalDataSource>(
+    () => CityLocalDataSource(box: getIt<Box>()),
   );
 
   //! Core
-  sl.registerLazySingleton<IConnectivity>(() => Connectivity(sl()));
+  getIt.registerLazySingleton<IConnectivity>(() => Connectivity(getIt()));
 
   //! External
   final appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   final box = await Hive.openBox(Constants.hiveBox);
-  sl.registerLazySingleton(() => box);
-  sl.registerLazySingleton(() => Dio());
-  sl.registerLazySingleton(() => DataConnectionChecker());
+  getIt.registerLazySingleton(() => box);
+  getIt.registerLazySingleton(() => Dio());
+  getIt.registerLazySingleton(() => DataConnectionChecker());
 
   //! Features
   // Controllers
-  sl.registerLazySingleton(() => SplashController(sl<ICityRepository>()));
+  getIt.registerLazySingleton(() => SplashController(getIt<ICityRepository>()));
 }

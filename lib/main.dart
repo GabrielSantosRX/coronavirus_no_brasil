@@ -1,15 +1,14 @@
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_screen.dart';
+import 'package:coronavirus_no_brasil/app/presentation/splash/splash_screen.dart';
 import 'package:coronavirus_no_brasil/app/presentation/startup_navigator/startup_navigator.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
+import 'package:coronavirus_no_brasil/injection_container.dart' as get_it;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'injection_container.dart' as di;
-
-import 'app/presentation/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
+  await get_it.init();
   runApp(CoronavirusNoBrasil());
 }
 
@@ -28,7 +27,7 @@ class _CoronavirusNoBrasilState extends State<CoronavirusNoBrasil> {
       title: Constants.appName,
       initialRoute: Constants.splashScreen,
       routes: {
-        Constants.splashScreen: (context) => SplashScreen(),
+        Constants.splashScreen: (context) => const SplashScreen(),
         Constants.startupNavigator: (context) => StartupNavigator(),
         Constants.dashboardScreen: (context) => DashboardScreen(),
       },

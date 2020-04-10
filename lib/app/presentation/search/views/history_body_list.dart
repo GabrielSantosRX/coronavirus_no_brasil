@@ -7,32 +7,30 @@ class HistoryBodyList extends StatelessWidget {
   final String historyWord;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          padding:
-              const EdgeInsets.only(top: 24, right: 242, bottom: 12, left: 24),
-          child: Text(
-            'Resultados',
-            style: Theme.of(context)
-                .textTheme
-                .body2
-                .copyWith(color: Constants.colorParagraph2),
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(
+                top: 24, right: 242, bottom: 12, left: 24),
+            child: Text(
+              'Resultados',
+              style: Theme.of(context)
+                  .textTheme
+                  .body2
+                  .copyWith(color: Constants.colorParagraph2),
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: MediaQuery.removePadding(
-            context: context,
-            removeTop: true,
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 12,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 12,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) => Padding(
                   padding: const EdgeInsets.all(8),
                   child: Container(
                     height: 54,
@@ -56,12 +54,10 @@ class HistoryBodyList extends StatelessWidget {
                       ],
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
 }

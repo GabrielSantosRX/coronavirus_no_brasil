@@ -1,4 +1,3 @@
-import 'package:coronavirus_no_brasil/core/exceptions.dart';
 import 'package:hive/hive.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:meta/meta.dart';

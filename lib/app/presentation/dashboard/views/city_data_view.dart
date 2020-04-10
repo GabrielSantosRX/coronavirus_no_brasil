@@ -7,25 +7,23 @@ class CityDataView extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text(
-                'Casos confirmados:',
-                style: TextStyle(color: Constants.colorProverbsIdiomsText),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          //IdiomCard(title: 'on para', content: 'çok az (para).'),
-          const SizedBox(height: 24),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Text(
+                  'Casos confirmados:',
+                  style: TextStyle(color: Constants.colorProverbsIdiomsText),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            //IdiomCard(title: 'on para', content: 'çok az (para).'),
+            const SizedBox(height: 24),
+          ],
+        ),
+      );
 }

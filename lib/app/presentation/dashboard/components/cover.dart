@@ -17,27 +17,26 @@ class Cover extends StatelessWidget {
   final double scale;
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: _isKeyboardVisible ? 0.0 : 1,
-      duration: const Duration(milliseconds: 280),
-      child: Container(
-        height: !_isKeyboardVisible ? ScreenUtil.getHeight(context) * scale : 0,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          image: const DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
+  Widget build(BuildContext context) => AnimatedOpacity(
+        opacity: _isKeyboardVisible ? 0.0 : 1,
+        duration: const Duration(milliseconds: 280),
+        child: Container(
+          height:
+              !_isKeyboardVisible ? ScreenUtil.getHeight(context) * scale : 0,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: const DecorationImage(
+              image: AssetImage('assets/bg.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              Constants.svgLogoName,
+              height: 314,
+            ),
           ),
         ),
-        child: Center(
-          child: SvgPicture.asset(
-            Constants.svgLogoName,
-            height: 314,
-          ),
-        ),
-      ),
-    );
-  }
+      );
 }

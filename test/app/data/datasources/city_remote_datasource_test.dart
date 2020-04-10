@@ -38,10 +38,10 @@ void main() {
             ));
   }
 
-  void setUpMockHttpClientFailure404() {
-    // when(mockHttpClient.get(any, headers: anyNamed('headers')))
-    //     .thenAnswer((_) async => http.Response('Something went wrong', 404));
-  }
+  //void setUpMockHttpClientFailure404() {
+  // when(mockHttpClient.get(any, headers: anyNamed('headers')))
+  //     .thenAnswer((_) async => http.Response('Something went wrong', 404));
+  //}
 
   test(
     '''must execute a GET request on a GitHub API and 
