@@ -70,7 +70,7 @@ class SearchBox extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: isKeyboardVisible ? const Color(0xFFF3A5B1) : Colors.transparent),
+                    border: Border.all(color: isKeyboardVisible ? Constants.colorBorder : Colors.transparent),
                     boxShadow: [
                       !isKeyboardVisible
                           ? BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 5, offset: const Offset(0, 10))

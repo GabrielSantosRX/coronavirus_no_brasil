@@ -38,19 +38,15 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           child: Stack(
             children: <Widget>[
-              Positioned(
-                top: 200,
-                left: 50,
-                right: 50,
-                child: SvgPicture.asset(
-                  Constants.svgLogo,
-                  height: 100,
-                ),
-              ),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    SvgPicture.asset(
+                      Constants.svgLogo,
+                      height: 100,
+                    ),
+                    const SizedBox(height: 21),
                     SvgPicture.asset(
                       Constants.svgLogoName,
                       height: 182,

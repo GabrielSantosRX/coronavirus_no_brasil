@@ -17,7 +17,7 @@ class CityDataView extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Casos confirmados: $city',
-                  style: TextStyle(color: Constants.colorProverbsIdiomsText),
+                  style: TextStyle(color: Constants.colorText),
                 ),
               ],
             ),

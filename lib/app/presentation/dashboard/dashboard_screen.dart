@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 
 class DashboardScreen extends StatefulWidget {
   final List<CityModel> citiesList;
@@ -46,7 +45,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       });
     });
 
-    //reaction((_) => _searchFn.hasFocus, (bool hasFocus) => _dashboardController.isKeyboardVisible = hasFocus);
     super.initState();
   }
 

@@ -14,8 +14,7 @@ class _StartupNavigatorState extends State<StartupNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    final List<CityModel> _citiesList =
-        ModalRoute.of(context).settings.arguments;
+    final List<CityModel> _citiesList = ModalRoute.of(context).settings.arguments;
 
     final _screens = <Widget>[
       const Center(child: Text('Todo')),
@@ -40,7 +39,7 @@ class _StartupNavigatorState extends State<StartupNavigator> {
           });
         },
         initialActiveIndex: _currentPage,
-        style: TabStyle.fixedCircle,
+        style: TabStyle.reactCircle,
         items: <TabItem>[
           TabItem(icon: Icons.local_hospital, title: ''),
           TabItem(icon: Icons.search, title: ''),
