@@ -74,6 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           SearchBox(
+            text: (null != _dashboardController.citySelected) ? _dashboardController.citySelected.cityQuery : _dashboardController.searchText,
             isKeyboardVisible: _isKeyboardVisible,
             focusNode: _searchFn,
             isScrollSearchBody: _isScrollSearchBody,

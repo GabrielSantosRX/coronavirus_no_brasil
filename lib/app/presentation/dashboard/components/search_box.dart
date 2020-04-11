@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
 import 'package:coronavirus_no_brasil/core/app_widget.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
@@ -6,42 +8,41 @@ import 'package:coronavirus_no_brasil/injection_container.dart';
 import 'package:diacritic/diacritic.dart' as dic;
 import 'package:flutter/material.dart';
 
-class SearchBox extends StatefulWidget {
+class SearchBox extends StatelessWidget {
+  final String text;
   final bool isKeyboardVisible;
   final bool isScrollSearchBody;
   final double searchBoxScrollPosition;
   final FocusNode focusNode;
 
-  SearchBox({this.isKeyboardVisible, this.focusNode, this.isScrollSearchBody, this.searchBoxScrollPosition});
+  SearchBox({this.text, this.isKeyboardVisible, this.focusNode, this.isScrollSearchBody, this.searchBoxScrollPosition});
 
-  @override
-  _SearchBoxState createState() => _SearchBoxState();
-}
-
-class _SearchBoxState extends State<SearchBox> {
   final DashboardController _dashboardController = getIt<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
-    final searchController = TextEditingController();
+    print('searchbox build $text');
+
+    final searchController = TextEditingController(text: isKeyboardVisible ? _dashboardController.searchText : text); //_dashboardController.searchText);
 
     searchController.addListener(() {
+      print('searchController addListener ${searchController.text}');
       _dashboardController.searchText = dic.removeDiacritics(searchController.text.toLowerCase());
     });
 
     return AnimatedPositioned(
-      duration: Duration(milliseconds: !widget.isKeyboardVisible ? 220 : 0),
-      top: widget.isKeyboardVisible ? widget.searchBoxScrollPosition : ScreenUtil.getHeight(context) * .25 - 26,
+      duration: Duration(milliseconds: !isKeyboardVisible ? 220 : 0),
+      top: isKeyboardVisible ? searchBoxScrollPosition : ScreenUtil.getHeight(context) * .25 - 26,
       left: 0,
       right: 0,
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 220),
-        opacity: !widget.isScrollSearchBody && widget.isKeyboardVisible ? 0.0 : 1.0,
+        opacity: !isScrollSearchBody && isKeyboardVisible ? 0.0 : 1.0,
         child: Row(
           children: <Widget>[
-            widget.isKeyboardVisible
+            isKeyboardVisible
                 ? AnimatedOpacity(
-                    opacity: !widget.isKeyboardVisible ? 0.0 : 1.0,
+                    opacity: !isKeyboardVisible ? 0.0 : 1.0,
                     duration: const Duration(milliseconds: 1000),
                     child: Container(
                       margin: const EdgeInsets.only(left: 16),
@@ -55,7 +56,7 @@ class _SearchBoxState extends State<SearchBox> {
                         child: Center(
                           child: Container(
                             padding: const EdgeInsets.only(top: 12, bottom: 12, right: 4, left: 4),
-                            child: Icon(Icons.arrow_back_ios),
+                            child: (Platform.isIOS) ? Icon(Icons.arrow_back_ios) : Icon(Icons.arrow_back),
                           ),
                         ),
                       ),
@@ -69,9 +70,9 @@ class _SearchBoxState extends State<SearchBox> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: widget.isKeyboardVisible ? const Color(0xFFF3A5B1) : Colors.transparent),
+                    border: Border.all(color: isKeyboardVisible ? const Color(0xFFF3A5B1) : Colors.transparent),
                     boxShadow: [
-                      !widget.isKeyboardVisible
+                      !isKeyboardVisible
                           ? BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 5, offset: const Offset(0, 10))
                           : BoxShadow(color: Constants.colorPrimary.withOpacity(0.1), offset: const Offset(0, 0), blurRadius: 3, spreadRadius: 1)
                     ]),
@@ -82,7 +83,7 @@ class _SearchBoxState extends State<SearchBox> {
                     children: <Widget>[
                       Flexible(
                         child: TextFormField(
-                          focusNode: widget.focusNode,
+                          focusNode: focusNode,
                           controller: searchController,
                           decoration: InputDecoration(
                             hintText: 'Digite aqui a sua cidade...',
@@ -114,7 +115,7 @@ class _SearchBoxState extends State<SearchBox> {
                           ),
                         ),
                       ),
-                      widget.isKeyboardVisible
+                      isKeyboardVisible
                           ? IconButton(
                               icon: Icon(
                                 Icons.close,
