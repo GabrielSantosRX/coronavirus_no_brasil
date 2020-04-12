@@ -107,7 +107,7 @@ packages:
     source: hosted
     version: "1.1.2"
   charts_common:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: charts_common
       url: "https://pub.dartlang.org"
@@ -325,7 +325,7 @@ packages:
     source: hosted
     version: "2.1.4"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"

@@ -12,9 +12,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart' as intl;
 
 class CountryScreen extends StatelessWidget {
   final CitiesCollection citiesData;
+  final punctuation = intl.NumberFormat('###,###,###', 'pt_BR');
 
   int totalCasesInBrazil;
   int totalCasesInAC;
@@ -157,25 +160,54 @@ class CountryScreen extends StatelessWidget {
         .reduce((a, b) => a + b);
   }
 
-  // List<charts.Series<GaugeSegment, String>> _createGaugeData() {
-  //   final data = [
-  //     GaugeSegment(
-  //         'Casos confirmados',
-  //         _cityController.cityCases.covidCases.last.confirmed -
-  //             _cityController.cityCases.covidCases.last.deaths),
-  //     GaugeSegment('Óbitos', _cityController.cityCases.covidCases.last.deaths),
-  //   ];
+  List<charts.Series<GaugeSegment, String>> _createGaugeData() {
+    final data = [
+      // norte verde
+      GaugeSegment('AC', totalCasesInAC, color: charts.Color.fromHex(code: '#059142')),
+      GaugeSegment('AP', totalCasesInAP, color: charts.Color.fromHex(code: '#06a94d')),
+      GaugeSegment('AM', totalCasesInAM, color: charts.Color.fromHex(code: '#06c258')),
+      GaugeSegment('PA', totalCasesInPA, color: charts.Color.fromHex(code: '#07da63')),
+      GaugeSegment('RO', totalCasesInRO, color: charts.Color.fromHex(code: '#08f26e')),
+      GaugeSegment('RR', totalCasesInRR, color: charts.Color.fromHex(code: '#68BB59')),
+      GaugeSegment('TO', totalCasesInTO, color: charts.Color.fromHex(code: '#76BA1B')),
+      // nordeste amarelo
+      GaugeSegment('AL', totalCasesInAL, color: charts.Color.fromHex(code: '#F6C616')),
+      GaugeSegment('BA', totalCasesInBA, color: charts.Color.fromHex(code: '#F9E231')),
+      GaugeSegment('CE', totalCasesInCE, color: charts.Color.fromHex(code: '#FEF54F')),
+      GaugeSegment('MA', totalCasesInMA, color: charts.Color.fromHex(code: '#FFFF9F')),
+      GaugeSegment('PB', totalCasesInPB, color: charts.Color.fromHex(code: '#FFF700')),
+      GaugeSegment('PE', totalCasesInPE, color: charts.Color.fromHex(code: '#F7D214')),
+      GaugeSegment('PI', totalCasesInPI, color: charts.Color.fromHex(code: '#FAE11F')),
+      GaugeSegment('RN', totalCasesInRN, color: charts.Color.fromHex(code: '#FCF029')),
+      GaugeSegment('SE', totalCasesInSE, color: charts.Color.fromHex(code: '#FFFF33')),
+      // centro-oeste vermelho
+      GaugeSegment('GO', totalCasesInGO, color: charts.Color.fromHex(code: '#933b27')),
+      GaugeSegment('MT', totalCasesInMT, color: charts.Color.fromHex(code: '#b04632')),
+      GaugeSegment('MS', totalCasesInMS, color: charts.Color.fromHex(code: '#cf513d')),
+      // df violeta
+      GaugeSegment('DF', totalCasesInDF, color: charts.Color.fromHex(code: '#B83384')),
+      // sudeste azul
+      GaugeSegment('ES', totalCasesInES, color: charts.Color.fromHex(code: '#2154EE')),
+      GaugeSegment('MG', totalCasesInMG, color: charts.Color.fromHex(code: '#2A6FEA')),
+      GaugeSegment('RJ', totalCasesInRJ, color: charts.Color.fromHex(code: '#3796DF')),
+      GaugeSegment('SP', totalCasesInSP, color: charts.Color.fromHex(code: '#41B9D4')),
+      // sul roxo
+      GaugeSegment('PR', totalCasesInPR, color: charts.Color.fromHex(code: '#481391')),
+      GaugeSegment('RS', totalCasesInRS, color: charts.Color.fromHex(code: '#7436b4')),
+      GaugeSegment('SC', totalCasesInSC, color: charts.Color.fromHex(code: '#684299')),
+    ];
 
-  //   return [
-  //     charts.Series<GaugeSegment, String>(
-  //       id: 'Segments',
-  //       colorFn: (_, index) => charts.MaterialPalette.green.makeShades(2)[index],
-  //       domainFn: (GaugeSegment x, _) => x.segment,
-  //       measureFn: (GaugeSegment y, _) => y.value,
-  //       data: data,
-  //     )
-  //   ];
-  // }
+    return [
+      charts.Series<GaugeSegment, String>(
+        id: 'Segments',
+        colorFn: (_, index) =>
+            data[index].color, // charts.MaterialPalette.green.makeShades(data.length)[index],
+        domainFn: (GaugeSegment x, _) => x.segment,
+        measureFn: (GaugeSegment y, _) => y.value,
+        data: data,
+      )
+    ];
+  }
 
   @override
   Widget build(BuildContext context) => Container(
@@ -188,7 +220,7 @@ class CountryScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  '$totalCasesInBrazil',
+                  '${punctuation.format(totalCasesInBrazil)}',
                   style: TextStyle(
                     color: Constants.colorText,
                     fontFamily: 'LibreBaskerville-Regular',
@@ -214,12 +246,35 @@ class CountryScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'até a última atualização ${citiesData.lastUpdate}',
+                  'a última atualização foi no dia ${citiesData.lastUpdate.day}/${citiesData.lastUpdate.month}.',
                   style: TextStyle(color: Constants.colorText),
                 ),
               ],
             ),
             const SizedBox(height: 7),
+            Container(
+              height: MediaQuery.of(context).size.width - 50,
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: <Widget>[
+                  SvgPicture.asset(
+                    Constants.svgBrazilMap,
+                    height: MediaQuery.of(context).size.width - 50,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.width - 182,
+                    width: MediaQuery.of(context).size.width - 182,
+                    child: charts.PieChart(_createGaugeData(),
+                        animate: false,
+                        defaultRenderer: charts.ArcRendererConfig(
+                            strokeWidthPx: 0,
+                            arcWidth: 30,
+                            startAngle: 4 / 5 * pi,
+                            arcLength: 7 / 5 * pi)),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 7),
             const SizedBox(height: 33),
           ],

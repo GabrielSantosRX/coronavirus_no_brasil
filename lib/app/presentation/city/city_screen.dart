@@ -4,11 +4,13 @@ import 'package:coronavirus_no_brasil/app/models/city_cases_model.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/city/city_controller.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
+import 'package:coronavirus_no_brasil/core/gauge_segment.dart';
 import 'package:coronavirus_no_brasil/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart' as intl;
 
 class CityScreen extends StatefulWidget {
   final CityModel city;
@@ -21,6 +23,7 @@ class CityScreen extends StatefulWidget {
 
 class _CityScreenState extends State<CityScreen> {
   final _cityController = getIt<CityController>();
+  final punctuation = intl.NumberFormat('###,###,###', 'pt_BR');
 
   @override
   void initState() {
@@ -53,8 +56,8 @@ class _CityScreenState extends State<CityScreen> {
       charts.Series<GaugeSegment, String>(
         id: 'Segments',
         colorFn: (_, index) => charts.MaterialPalette.green.makeShades(2)[index],
-        domainFn: (GaugeSegment d, _) => d.segment,
-        measureFn: (GaugeSegment m, _) => m.size,
+        domainFn: (GaugeSegment x, _) => x.segment,
+        measureFn: (GaugeSegment y, _) => y.value,
         data: data,
       )
     ];
@@ -74,7 +77,7 @@ class _CityScreenState extends State<CityScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          '${_cityController.cityCases.covidCases.last.confirmed}', // ${_cityController.cityCases.covidCases}',
+                          '${punctuation.format(_cityController.cityCases.covidCases.last.confirmed)}',
                           style: TextStyle(
                             color: Constants.colorText,
                             fontFamily: 'LibreBaskerville-Regular',
@@ -315,11 +318,4 @@ class _CityScreenState extends State<CityScreen> {
       ],
     );
   }
-}
-
-class GaugeSegment {
-  final String segment;
-  final int size;
-
-  GaugeSegment(this.segment, this.size);
 }

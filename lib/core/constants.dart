@@ -45,6 +45,7 @@ class Constants {
   static const String dashboardScreen = '/dashboard';
 
   // Assets
+  static const String svgBrazilMap = 'assets/brazil_states.svg';
   static const String svgLogo = 'assets/logo_w.svg';
   static const String svgLogoName = 'assets/logo_name.svg';
   //static const String svgLogoRed = 'assets/logo_red.svg';
