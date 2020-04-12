@@ -22,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     reaction<bool>(
       (x) => _splashController.isDataLoaded,
-      (result) => Navigator.of(context).pushReplacementNamed(Constants.startupNavigator, arguments: _splashController.citiesList),
+      (result) => Navigator.of(context).pushReplacementNamed(Constants.startupNavigator,
+          arguments: _splashController.citiesList),
     );
 
     super.initState();
@@ -53,13 +54,15 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     const SizedBox(height: 21),
                     Observer(
-                      builder: (_) => Text(_splashController.status, style: Theme.of(context).textTheme.body2.copyWith(color: Colors.white)),
+                      builder: (_) => Text(_splashController.status,
+                          style: Theme.of(context).textTheme.body2.copyWith(color: Colors.white)),
                     ),
                     const SizedBox(height: 21),
                     Theme(
                       data: ThemeData(
                         accentColor: Colors.white,
-                        cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.dark),
+                        cupertinoOverrideTheme:
+                            const CupertinoThemeData(brightness: Brightness.dark),
                       ),
                       child: (Platform.isIOS)
                           ? const CupertinoActivityIndicator(

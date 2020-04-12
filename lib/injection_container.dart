@@ -1,3 +1,4 @@
+import 'package:coronavirus_no_brasil/app/presentation/city/city_controller.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:coronavirus_no_brasil/app/data/datasources/city_local_datasource.dart';
@@ -36,8 +37,7 @@ Future<void> init() async {
   getIt.registerLazySingleton<IConnectivity>(() => Connectivity(getIt()));
 
   //! External
-  final appDocumentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
+  final appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   final box = await Hive.openBox(Constants.hiveBox);
   getIt.registerLazySingleton(() => box);
@@ -48,4 +48,5 @@ Future<void> init() async {
   // Controllers
   getIt.registerLazySingleton(() => SplashController(getIt<ICityRepository>()));
   getIt.registerLazySingleton(() => DashboardController());
+  getIt.registerLazySingleton(() => CityController(getIt<ICityRepository>()));
 }

@@ -1,3 +1,4 @@
+import 'package:coronavirus_no_brasil/app/models/city_cases_model.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:mobx/mobx.dart';
 

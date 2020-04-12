@@ -20,7 +20,7 @@ class HistoryBodyList extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 24, right: 242, bottom: 12, left: 24),
             child: Text(
-              citiesList.isEmpty ? 'Pesquise' : citiesList.length > 1 ? 'Resultados' : 'Resultado',
+              citiesList.isEmpty ? '' : citiesList.length > 1 ? 'Resultados' : 'Resultado',
               style: Theme.of(context).textTheme.body2.copyWith(color: Constants.colorParagraph2),
             ),
           ),
@@ -52,7 +52,7 @@ class HistoryBodyList extends StatelessWidget {
                         style: Theme.of(context).textTheme.body2.copyWith(color: Constants.colorHeading),
                       ),
                       subtitle: Text('Casos Confirmados: ${citiesList[index].totalCases}'),
-                      trailing: (Platform.isIOS) ? Icon(Icons.arrow_forward_ios) : Icon(Icons.arrow_forward),
+                      //trailing: (Platform.isIOS) ? Icon(Icons.arrow_forward_ios) : Icon(Icons.arrow_forward),
                       onTap: () {
                         print('selected ${citiesList[index]}');
                         _dashboardController.searchText = citiesList[index].cityQuery;

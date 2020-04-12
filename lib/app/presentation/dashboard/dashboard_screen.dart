@@ -1,4 +1,5 @@
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
+import 'package:coronavirus_no_brasil/app/presentation/city/city_screen.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/components/cover.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/components/search_box.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
@@ -65,14 +66,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: Padding(
                     padding: EdgeInsets.only(top: _isKeyboardVisible ? 102 : 52, bottom: 32),
                     child: Observer(
-                        builder: (_) => _isKeyboardVisible ? SearchScreen(citiesList: _dashboardController.citiesFiltered) : CityDataView(city: _dashboardController.citySelected)),
+                        builder: (_) => _isKeyboardVisible
+                            ? SearchScreen(citiesList: _dashboardController.citiesFiltered)
+                            : CityScreen(city: _dashboardController.citySelected)),
                   ),
                 ),
               ),
             ],
           ),
           SearchBox(
-            text: (null != _dashboardController.citySelected) ? _dashboardController.citySelected.cityQuery : _dashboardController.searchText,
+            text: (null != _dashboardController.citySelected)
+                ? _dashboardController.citySelected.cityQuery
+                : _dashboardController.searchText,
             isKeyboardVisible: _isKeyboardVisible,
             focusNode: _searchFn,
             isScrollSearchBody: _isScrollSearchBody,

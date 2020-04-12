@@ -1,5 +1,6 @@
 import 'package:coronavirus_no_brasil/app/data/datasources/city_local_datasource.dart';
 import 'package:coronavirus_no_brasil/app/data/datasources/city_remote_datasource.dart';
+import 'package:coronavirus_no_brasil/app/models/city_cases_model.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/core/connectivity.dart';
 import 'package:csv/csv.dart';
@@ -11,6 +12,7 @@ mixin ICityRepository {
   Future<bool> get checkRequiredUpdate;
 
   Future<List<CityModel>> getCitiesUpdated();
+  Future<CityCasesModel> getCityCases(int ibgeID);
 }
 
 class CityRepository implements ICityRepository {
@@ -59,5 +61,19 @@ class CityRepository implements ICityRepository {
     rows.removeAt(0); // remove titles
 
     return rows.map((r) => CityModel.fromCSV(r)).toList();
+  }
+
+  @override
+  Future<CityCasesModel> getCityCases(int ibgeID) async {
+    print('getCityCases $ibgeID');
+
+    final isConnected = await connectivity.isConnected;
+    if (!isConnected) return null;
+
+    final jsonRaw = await remoteDataSource.getCityCases(ibgeID);
+
+    if (null == jsonRaw || jsonRaw.isEmpty) return null;
+
+    return CityCasesModel.fromRawJson(jsonRaw);
   }
 }
