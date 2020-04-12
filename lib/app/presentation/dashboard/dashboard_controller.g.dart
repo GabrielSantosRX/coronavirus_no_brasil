@@ -65,7 +65,7 @@ mixin _$DashboardController on DashboardControllerBase, Store {
       ActionController(name: 'DashboardControllerBase');
 
   @override
-  dynamic setCitiesData(List<CityModel> value) {
+  dynamic setCitiesData(CitiesCollection value) {
     final _$actionInfo =
         _$DashboardControllerBaseActionController.startAction();
     try {

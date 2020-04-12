@@ -1,7 +1,6 @@
 import 'package:coronavirus_no_brasil/app/models/commit_github_model.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/exceptions.dart';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
@@ -38,7 +37,8 @@ class CityRemoteDataSource implements ICityRemoteDataSource {
 
   @override
   Future<String> getCityCases(int ibgeID) async {
-    final Response<String> response = await dio.get(
+    Response<String> response;
+    response = await dio.get(
       Constants.urlBrasilioCityCasesAPI,
       options: Options(responseType: ResponseType.json),
       queryParameters: {'city_ibge_code': ibgeID},

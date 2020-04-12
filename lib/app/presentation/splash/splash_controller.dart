@@ -1,4 +1,5 @@
 import 'package:coronavirus_no_brasil/app/data/repositories/city_repository.dart';
+import 'package:coronavirus_no_brasil/app/models/cities_collection.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:mobx/mobx.dart';
 
@@ -15,7 +16,7 @@ abstract class SplashControllerBase with Store {
   @observable
   String status = 'Inicializando';
 
-  List<CityModel> citiesList = <CityModel>[];
+  CitiesCollection citiesList;
 
   SplashControllerBase(this.cityRepository) {
     _updateData();

@@ -19,8 +19,8 @@ class CityCasesModel {
 
   CityCasesModel copyWith({
     int count,
-    dynamic next,
-    dynamic previous,
+    next,
+    previous,
     List<CovidCase> covidCases,
   }) =>
       CityCasesModel(
@@ -144,9 +144,7 @@ class CovidCase implements Comparable<CovidCase> {
       };
 
   @override
-  String toString() {
-    return '$city $confirmed';
-  }
+  String toString() => '$city $confirmed';
 
   @override
   int compareTo(CovidCase other) => date.compareTo(other.date);

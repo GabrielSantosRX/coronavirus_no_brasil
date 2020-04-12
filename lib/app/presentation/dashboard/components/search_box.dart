@@ -15,18 +15,25 @@ class SearchBox extends StatelessWidget {
   final double searchBoxScrollPosition;
   final FocusNode focusNode;
 
-  SearchBox({this.text, this.isKeyboardVisible, this.focusNode, this.isScrollSearchBody, this.searchBoxScrollPosition});
+  SearchBox(
+      {this.text,
+      this.isKeyboardVisible,
+      this.focusNode,
+      this.isScrollSearchBody,
+      this.searchBoxScrollPosition});
 
   final DashboardController _dashboardController = getIt<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
-    print('searchbox build $text');
-
-    final searchController = TextEditingController(text: isKeyboardVisible ? _dashboardController.searchText : text); //_dashboardController.searchText);
+    final searchController =
+        TextEditingController(text: isKeyboardVisible ? _dashboardController.searchText : text);
 
     searchController.addListener(() {
       print('searchController addListener ${searchController.text}');
+
+      if (searchController.text.isEmpty) _dashboardController.citySelected = null;
+
       _dashboardController.searchText = dic.removeDiacritics(searchController.text.toLowerCase());
     });
 
@@ -56,7 +63,9 @@ class SearchBox extends StatelessWidget {
                         child: Center(
                           child: Container(
                             padding: const EdgeInsets.only(top: 12, bottom: 12, right: 4, left: 4),
-                            child: (Platform.isIOS) ? Icon(Icons.arrow_back_ios) : Icon(Icons.arrow_back),
+                            child: (Platform.isIOS)
+                                ? Icon(Icons.arrow_back_ios)
+                                : Icon(Icons.arrow_back),
                           ),
                         ),
                       ),
@@ -70,11 +79,19 @@ class SearchBox extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: isKeyboardVisible ? Constants.colorBorder : Colors.transparent),
+                    border: Border.all(
+                        color: isKeyboardVisible ? Constants.colorBorder : Colors.transparent),
                     boxShadow: [
                       !isKeyboardVisible
-                          ? BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 5, offset: const Offset(0, 10))
-                          : BoxShadow(color: Constants.colorPrimary.withOpacity(0.1), offset: const Offset(0, 0), blurRadius: 3, spreadRadius: 1)
+                          ? BoxShadow(
+                              color: Colors.grey.withOpacity(0.1),
+                              blurRadius: 5,
+                              offset: const Offset(0, 10))
+                          : BoxShadow(
+                              color: Constants.colorPrimary.withOpacity(0.1),
+                              offset: const Offset(0, 0),
+                              blurRadius: 3,
+                              spreadRadius: 1)
                     ]),
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Theme(

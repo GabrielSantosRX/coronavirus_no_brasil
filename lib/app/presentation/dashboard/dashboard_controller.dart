@@ -1,5 +1,6 @@
-import 'package:coronavirus_no_brasil/app/models/city_cases_model.dart';
+import 'package:coronavirus_no_brasil/app/models/cities_collection.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
+import 'package:dartz/dartz_streaming.dart';
 import 'package:mobx/mobx.dart';
 
 part 'dashboard_controller.g.dart';
@@ -14,9 +15,9 @@ abstract class DashboardControllerBase with Store {
   List<CityModel> citiesFiltered = <CityModel>[];
 
   @observable
-  CityModel citySelected = CityModel();
+  CityModel citySelected;
 
-  List<CityModel> citiesData = <CityModel>[];
+  CitiesCollection citiesData;
 
   DashboardControllerBase() {
     reaction((_) => searchText, (String result) {
@@ -37,5 +38,5 @@ abstract class DashboardControllerBase with Store {
   }
 
   @action
-  setCitiesData(List<CityModel> value) => citiesData = value;
+  setCitiesData(CitiesCollection value) => citiesData = value;
 }

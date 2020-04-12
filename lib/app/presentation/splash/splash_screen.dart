@@ -44,11 +44,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SvgPicture.asset(
-                      Constants.svgLogo,
-                      height: 100,
-                    ),
-                    const SizedBox(height: 21),
-                    SvgPicture.asset(
                       Constants.svgLogoName,
                       height: 182,
                     ),

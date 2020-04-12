@@ -1,5 +1,5 @@
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
-import 'package:coronavirus_no_brasil/app/presentation/search/views/history_body_list.dart';
+import 'package:coronavirus_no_brasil/app/presentation/search/history_body_list.dart';
 import 'package:coronavirus_no_brasil/core/fade_animation.dart';
 import 'package:flutter/material.dart';
 

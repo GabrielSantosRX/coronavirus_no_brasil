@@ -1,19 +1,22 @@
+import 'package:coronavirus_no_brasil/app/models/cities_collection.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/city/city_screen.dart';
+import 'package:coronavirus_no_brasil/app/presentation/country/country_screen.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/components/cover.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/components/search_box.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
-import 'package:coronavirus_no_brasil/app/presentation/dashboard/views/city_data_view.dart';
 import 'package:coronavirus_no_brasil/app/presentation/search/search_screen.dart';
+import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/system_overlay.dart';
 import 'package:coronavirus_no_brasil/injection_container.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class DashboardScreen extends StatefulWidget {
-  final List<CityModel> citiesList;
+  final CitiesCollection citiesList;
 
   const DashboardScreen({Key key, this.citiesList}) : super(key: key);
 
@@ -61,14 +64,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: <Widget>[
               Cover(isKeyboardVisible: _isKeyboardVisible, context: context, scale: 0.25),
               Expanded(
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: _isKeyboardVisible ? 102 : 52, bottom: 32),
-                    child: Observer(
-                        builder: (_) => _isKeyboardVisible
-                            ? SearchScreen(citiesList: _dashboardController.citiesFiltered)
-                            : CityScreen(city: _dashboardController.citySelected)),
+                child: Theme(
+                  data: ThemeData(
+                    accentColor: Constants.colorPrimary,
+                    cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.light),
+                  ),
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: _isKeyboardVisible ? 102 : 52, bottom: 32),
+                      child: Observer(
+                          builder: (_) => _isKeyboardVisible
+                              ? SearchScreen(citiesList: _dashboardController.citiesFiltered)
+                              : (null != _dashboardController.citySelected)
+                                  ? CityScreen(city: _dashboardController.citySelected)
+                                  : CountryScreen(citiesData: _dashboardController.citiesData)),
+                    ),
                   ),
                 ),
               ),
