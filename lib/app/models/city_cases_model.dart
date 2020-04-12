@@ -116,7 +116,7 @@ class CovidCase implements Comparable<CovidCase> {
         city: json['city'],
         cityIbgeCode: json['city_ibge_code'],
         confirmed: json['confirmed'],
-        confirmedPer100KInhabitants: json['confirmed_per_100k_inhabitants'].toDouble(),
+        confirmedPer100KInhabitants: json['confirmed_per_100k_inhabitants']?.toDouble(),
         date: DateTime.parse(json['date']),
         deathRate: json['death_rate']?.toDouble(),
         deaths: json['deaths'],

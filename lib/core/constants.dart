@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Constants {
   // colors
-  static const Color colorPrimary = Color.fromARGB(255, 75, 206, 170);
+  static const Color colorPrimary = Color.fromARGB(255, 0, 144, 103);
   static const Color colorPageBg = Color(0xFFF8F8F8);
   static const Color colorHeading = Color(0xFF0A151F);
   static const Color colorParagraph = Color(0xFF4B5866);
@@ -50,8 +50,10 @@ class Constants {
   //static const String svgLogoRed = 'assets/logo_red.svg';
 
   // Urls
-  static const String urlGitHubApi = 'https://api.github.com/repos/wcota/covid19br/commits?path=cases-brazil-cities.csv&page=1&per_page=1';
-  static const String urlGitHubCitiesCSV = 'https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities.csv';
+  static const String urlGitHubApi =
+      'https://api.github.com/repos/wcota/covid19br/commits?path=cases-brazil-cities.csv&page=1&per_page=1';
+  static const String urlGitHubCitiesCSV =
+      'https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities.csv';
   static const String urlBrasilioCityCasesAPI = 'https://brasil.io/api/dataset/covid19/caso/data';
 
   // region LocalCacha

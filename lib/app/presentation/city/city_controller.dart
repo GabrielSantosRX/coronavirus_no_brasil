@@ -26,6 +26,7 @@ abstract class CityControllerBase with Store {
     isLoading = true;
     city = citySelected;
     cityCases = await cityRepository.getCityCases(city.ibgeID);
+    cityCases.covidCases.sort();
     isLoading = false;
   }
 }

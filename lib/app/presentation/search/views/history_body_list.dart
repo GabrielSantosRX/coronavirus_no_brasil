@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_controller.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
@@ -44,14 +42,18 @@ class HistoryBodyList extends StatelessWidget {
                     child: ListTile(
                       leading: CircleAvatar(
                         child: Text(citiesList[index].state),
-                        backgroundColor: Constants.colorPullDown1,
+                        backgroundColor: Constants.colorPrimary,
                         foregroundColor: Colors.white,
                       ),
                       title: Text(
                         citiesList[index].city,
-                        style: Theme.of(context).textTheme.body2.copyWith(color: Constants.colorHeading),
+                        style: Theme.of(context)
+                            .textTheme
+                            .body2
+                            .copyWith(color: Constants.colorHeading),
                       ),
-                      subtitle: Text('Casos Confirmados: ${citiesList[index].totalCases}'),
+                      subtitle:
+                          Text('${citiesList[index].totalCases} / ${citiesList[index].deaths}'),
                       //trailing: (Platform.isIOS) ? Icon(Icons.arrow_forward_ios) : Icon(Icons.arrow_forward),
                       onTap: () {
                         print('selected ${citiesList[index]}');

@@ -8,11 +8,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'dart:math';
 
 class CityScreen extends StatefulWidget {
   final CityModel city;
 
-  CityScreen({Key key, this.city}) : super(key: key);
+  const CityScreen({Key key, this.city}) : super(key: key);
 
   @override
   _CityScreenState createState() => _CityScreenState();
@@ -30,7 +31,6 @@ class _CityScreenState extends State<CityScreen> {
   }
 
   List<charts.Series<CovidCase, DateTime>> _createChartData() {
-    _cityController.cityCases.covidCases.sort();
     return [
       charts.Series<CovidCase, DateTime>(
         id: 'Casos confirmados',
@@ -38,6 +38,28 @@ class _CityScreenState extends State<CityScreen> {
         domainFn: (CovidCase c, _) => c.date,
         measureFn: (CovidCase c, _) => c.confirmed,
         data: _cityController.cityCases.covidCases,
+      )
+    ];
+  }
+
+  List<charts.Series<GaugeSegment, String>> _createGaugeData() {
+    final data = [
+      GaugeSegment(
+          'Casos confirmados',
+          _cityController.cityCases.covidCases.last.confirmed -
+              _cityController.cityCases.covidCases.last.deaths),
+      GaugeSegment('Óbitos', _cityController.cityCases.covidCases.last.deaths),
+    ];
+
+    return [
+      charts.Series<GaugeSegment, String>(
+        id: 'Segments',
+        colorFn: (_, index) {
+          return charts.MaterialPalette.green.makeShades(2)[index];
+        },
+        domainFn: (GaugeSegment d, _) => d.segment,
+        measureFn: (GaugeSegment m, _) => m.size,
+        data: data,
       )
     ];
   }
@@ -53,20 +75,39 @@ class _CityScreenState extends State<CityScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Casos confirmados: ${widget.city}',
+                        '${_cityController.cityCases.covidCases.last.confirmed}', // ${_cityController.cityCases.covidCases}',
+                        style: TextStyle(
+                          color: Constants.colorText,
+                          fontFamily: 'LibreBaskerville-Regular',
+                          fontSize: 54,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        (_cityController.cityCases.covidCases.last.confirmed > 1)
+                            ? 'Casos confirmados em ${widget.city.city}/${widget.city.state},'
+                            : 'Caso confirmado em ${widget.city.city}/${widget.city.state},',
                         style: TextStyle(color: Constants.colorText),
                       ),
                     ],
                   ),
                   const SizedBox(height: 7),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        (null != _cityController.cityCases)
-                            ? 'first: ${_cityController.cityCases?.covidCases?.first}'
-                            : 'first: asdf asdf asdf ', // ${_cityController.cityCases.covidCases}',
+                        'a última atualização foi no dia ${_cityController.cityCases.covidCases.last.date.day}/${_cityController.cityCases.covidCases.last.date.month}.',
                         style: TextStyle(color: Constants.colorText),
                       ),
                     ],
@@ -89,7 +130,7 @@ class _CityScreenState extends State<CityScreen> {
                                 _createChartData(),
                                 animate: true,
                                 animationDuration: const Duration(milliseconds: 666),
-                                domainAxis: charts.DateTimeAxisSpec(
+                                domainAxis: const charts.DateTimeAxisSpec(
                                   tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
                                     day: charts.TimeFormatterSpec(
                                         format: 'd', transitionFormat: 'dd/MM'),
@@ -102,10 +143,84 @@ class _CityScreenState extends State<CityScreen> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 7),
+                  ...buildDeathRows(),
                 ],
               ),
       ),
     );
+  }
+
+  List<Widget> buildDeathRows() {
+    return _cityController.cityCases?.covidCases?.last?.deathRate != null
+        ? <Widget>[
+            Row(
+              children: <Widget>[
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: MediaQuery.of(context).size.width / 2,
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: charts.PieChart(_createGaugeData(),
+                          animate: false,
+                          defaultRenderer: charts.ArcRendererConfig(
+                              arcWidth: 30, startAngle: 4 / 5 * pi, arcLength: 7 / 5 * pi)),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          '${_cityController.cityCases.covidCases.last.deaths} ',
+                          style: TextStyle(
+                            color: Constants.colorText,
+                            fontFamily: 'LibreBaskerville-Regular',
+                            fontSize: 41,
+                          ),
+                        ),
+                        Text(
+                          (_cityController.cityCases.covidCases.last.deaths > 1)
+                              ? ' óbitos registrados,'
+                              : ' óbito registrado,',
+                          style: TextStyle(color: Constants.colorText),
+                        ),
+                        const SizedBox(height: 7),
+                        Text(
+                          '${(_cityController.cityCases.covidCases.last.deathRate * 100.00).toStringAsFixed(2)}% ',
+                          style: TextStyle(
+                            color: Constants.colorText,
+                            fontFamily: 'LibreBaskerville-Regular',
+                            fontSize: 32,
+                          ),
+                        ),
+                        Text(
+                          ' dos casos confirmados.',
+                          style: TextStyle(color: Constants.colorText),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 7),
+            const SizedBox(height: 33),
+          ]
+        : [
+            Text(
+              'Nenhum óbito registrado.',
+              style: TextStyle(color: Constants.colorText),
+            ),
+            const SizedBox(height: 7),
+          ];
   }
 
   Widget buildLoadingView() => Center(
@@ -116,4 +231,11 @@ class _CityScreenState extends State<CityScreen> {
               )
             : const CircularProgressIndicator(),
       );
+}
+
+class GaugeSegment {
+  final String segment;
+  final int size;
+
+  GaugeSegment(this.segment, this.size);
 }
