@@ -5,14 +5,17 @@ import 'package:coronavirus_no_brasil/app/models/cities_collection.dart';
 import 'package:coronavirus_no_brasil/app/models/city_cases_model.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/city/city_controller.dart';
+import 'package:coronavirus_no_brasil/app/presentation/country/region_view.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/core/gauge_segment.dart';
 import 'package:coronavirus_no_brasil/injection_container.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart' as intl;
 
 class CountryScreen extends StatelessWidget {
@@ -47,6 +50,33 @@ class CountryScreen extends StatelessWidget {
   int totalCasesInSP;
   int totalCasesInSE;
   int totalCasesInTO;
+
+  int get totalCasesInNorth =>
+      totalCasesInAC +
+      totalCasesInAP +
+      totalCasesInAM +
+      totalCasesInPA +
+      totalCasesInRO +
+      totalCasesInRR +
+      totalCasesInTO;
+
+  int get totalCasesInNortheast =>
+      totalCasesInAL +
+      totalCasesInBA +
+      totalCasesInCE +
+      totalCasesInMA +
+      totalCasesInPB +
+      totalCasesInPE +
+      totalCasesInPI +
+      totalCasesInRN +
+      totalCasesInSE;
+
+  int get totalCasesInMidwest => totalCasesInGO + totalCasesInMT + totalCasesInMS;
+
+  int get totalCasesInSoutheast =>
+      totalCasesInES + totalCasesInMG + totalCasesInRJ + totalCasesInSP;
+
+  int get totalCasesInSouth => totalCasesInPR + totalCasesInRS + totalCasesInSC;
 
   CountryScreen({Key key, this.citiesData}) : super(key: key) {
     totalCasesInBrazil = citiesData.map<int>((c) => c.totalCases).reduce((a, b) => a + b);
@@ -162,7 +192,7 @@ class CountryScreen extends StatelessWidget {
 
   List<charts.Series<GaugeSegment, String>> _createGaugeData() {
     final data = [
-      // norte verde
+      // north green
       GaugeSegment('AC', totalCasesInAC, color: charts.Color.fromHex(code: '#059142')),
       GaugeSegment('AP', totalCasesInAP, color: charts.Color.fromHex(code: '#06a94d')),
       GaugeSegment('AM', totalCasesInAM, color: charts.Color.fromHex(code: '#06c258')),
@@ -170,7 +200,7 @@ class CountryScreen extends StatelessWidget {
       GaugeSegment('RO', totalCasesInRO, color: charts.Color.fromHex(code: '#08f26e')),
       GaugeSegment('RR', totalCasesInRR, color: charts.Color.fromHex(code: '#68BB59')),
       GaugeSegment('TO', totalCasesInTO, color: charts.Color.fromHex(code: '#76BA1B')),
-      // nordeste amarelo
+      // northeast yellow
       GaugeSegment('AL', totalCasesInAL, color: charts.Color.fromHex(code: '#F6C616')),
       GaugeSegment('BA', totalCasesInBA, color: charts.Color.fromHex(code: '#F9E231')),
       GaugeSegment('CE', totalCasesInCE, color: charts.Color.fromHex(code: '#FEF54F')),
@@ -180,18 +210,18 @@ class CountryScreen extends StatelessWidget {
       GaugeSegment('PI', totalCasesInPI, color: charts.Color.fromHex(code: '#FAE11F')),
       GaugeSegment('RN', totalCasesInRN, color: charts.Color.fromHex(code: '#FCF029')),
       GaugeSegment('SE', totalCasesInSE, color: charts.Color.fromHex(code: '#FFFF33')),
-      // centro-oeste vermelho
+      // midwest red
       GaugeSegment('GO', totalCasesInGO, color: charts.Color.fromHex(code: '#933b27')),
       GaugeSegment('MT', totalCasesInMT, color: charts.Color.fromHex(code: '#b04632')),
       GaugeSegment('MS', totalCasesInMS, color: charts.Color.fromHex(code: '#cf513d')),
-      // df violeta
+      // df violet
       GaugeSegment('DF', totalCasesInDF, color: charts.Color.fromHex(code: '#B83384')),
-      // sudeste azul
+      // Southeast blue
       GaugeSegment('ES', totalCasesInES, color: charts.Color.fromHex(code: '#2154EE')),
       GaugeSegment('MG', totalCasesInMG, color: charts.Color.fromHex(code: '#2A6FEA')),
       GaugeSegment('RJ', totalCasesInRJ, color: charts.Color.fromHex(code: '#3796DF')),
       GaugeSegment('SP', totalCasesInSP, color: charts.Color.fromHex(code: '#41B9D4')),
-      // sul roxo
+      // South purple
       GaugeSegment('PR', totalCasesInPR, color: charts.Color.fromHex(code: '#481391')),
       GaugeSegment('RS', totalCasesInRS, color: charts.Color.fromHex(code: '#7436b4')),
       GaugeSegment('SC', totalCasesInSC, color: charts.Color.fromHex(code: '#684299')),
@@ -221,7 +251,7 @@ class CountryScreen extends StatelessWidget {
               children: <Widget>[
                 Text(
                   '${punctuation.format(totalCasesInBrazil)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Constants.colorText,
                     fontFamily: 'LibreBaskerville-Regular',
                     fontSize: 54,
@@ -233,7 +263,7 @@ class CountryScreen extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: const <Widget>[
                 Text(
                   'Casos confirmados no Brasil',
                   style: TextStyle(color: Constants.colorText),
@@ -247,7 +277,7 @@ class CountryScreen extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'a última atualização foi no dia ${citiesData.lastUpdate.day}/${citiesData.lastUpdate.month}.',
-                  style: TextStyle(color: Constants.colorText),
+                  style: const TextStyle(color: Constants.colorText),
                 ),
               ],
             ),
@@ -276,6 +306,127 @@ class CountryScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 7),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.green,
+                              ),
+                              title: Text(
+                                'Norte:  ${punctuation.format(totalCasesInNorth)}',
+                                style: const TextStyle(color: Constants.colorText),
+                              ),
+                            ),
+                            RegionView(
+                              stateData: [
+                                tuple3('AC', totalCasesInAC, Hexcolor(Constants.colorStateAC)),
+                                tuple3('AP', totalCasesInAP, Hexcolor(Constants.colorStateAP)),
+                                tuple3('AM', totalCasesInAM, Hexcolor(Constants.colorStateAM)),
+                                tuple3('PA', totalCasesInPA, Hexcolor(Constants.colorStatePA)),
+                                tuple3('RO', totalCasesInRO, Hexcolor(Constants.colorStateRO)),
+                                tuple3('RR', totalCasesInRR, Hexcolor(Constants.colorStateRR)),
+                                tuple3('TO', totalCasesInTO, Hexcolor(Constants.colorStateTO)),
+                              ],
+                            ),
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.yellow,
+                              ),
+                              title: Text(
+                                'Nordeste:  ${punctuation.format(totalCasesInNortheast)}',
+                                style: const TextStyle(color: Constants.colorText),
+                              ),
+                            ),
+                            RegionView(
+                              stateData: [
+                                tuple3('AL', totalCasesInAL, Hexcolor(Constants.colorStateAL)),
+                                tuple3('BA', totalCasesInBA, Hexcolor(Constants.colorStateBA)),
+                                tuple3('CE', totalCasesInCE, Hexcolor(Constants.colorStateCE)),
+                                tuple3('MA', totalCasesInMA, Hexcolor(Constants.colorStateMA)),
+                                tuple3('PB', totalCasesInPB, Hexcolor(Constants.colorStatePB)),
+                                tuple3('PE', totalCasesInPE, Hexcolor(Constants.colorStatePE)),
+                                tuple3('PI', totalCasesInPI, Hexcolor(Constants.colorStatePI)),
+                                tuple3('RN', totalCasesInRN, Hexcolor(Constants.colorStateRN)),
+                                tuple3('SE', totalCasesInSE, Hexcolor(Constants.colorStateSE)),
+                              ],
+                            ),
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.red,
+                              ),
+                              title: Text(
+                                'Centro-Oeste:  ${punctuation.format(totalCasesInMidwest)}',
+                                style: const TextStyle(color: Constants.colorText),
+                              ),
+                            ),
+                            RegionView(
+                              stateData: [
+                                tuple3('GO', totalCasesInGO, Hexcolor(Constants.colorStateGO)),
+                                tuple3('MT', totalCasesInMT, Hexcolor(Constants.colorStateMT)),
+                                tuple3('MS', totalCasesInMS, Hexcolor(Constants.colorStateMS)),
+                              ],
+                            ),
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.indigo,
+                              ),
+                              title: Text(
+                                'Distrito Federal:  ${punctuation.format(totalCasesInDF)}',
+                                style: const TextStyle(color: Constants.colorText),
+                              ),
+                            ),
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.blue,
+                              ),
+                              title: Text(
+                                'Suldeste:  ${punctuation.format(totalCasesInSoutheast)}',
+                                style: const TextStyle(color: Constants.colorText),
+                              ),
+                            ),
+                            RegionView(
+                              stateData: [
+                                tuple3('ES', totalCasesInES, Hexcolor(Constants.colorStateES)),
+                                tuple3('MG', totalCasesInMG, Hexcolor(Constants.colorStateMG)),
+                                tuple3('RJ', totalCasesInRJ, Hexcolor(Constants.colorStateRJ)),
+                                tuple3('SP', totalCasesInSP, Hexcolor(Constants.colorStateSP)),
+                              ],
+                            ),
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.purple,
+                              ),
+                              title: Text(
+                                'Sul:  ${punctuation.format(totalCasesInSouth)}',
+                                style: const TextStyle(color: Constants.colorText),
+                              ),
+                            ),
+                            RegionView(
+                              stateData: [
+                                tuple3('PR', totalCasesInPR, Hexcolor(Constants.colorStatePR)),
+                                tuple3('RS', totalCasesInRS, Hexcolor(Constants.colorStateRS)),
+                                tuple3('SC', totalCasesInSC, Hexcolor(Constants.colorStateSC)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 33),
           ],
         ),

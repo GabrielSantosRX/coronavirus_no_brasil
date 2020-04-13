@@ -22,6 +22,40 @@ class Constants {
   static const Color colorBottomSheetItemHeader = Color(0xFF183148);
   static const Color colorBottomSheetDivider = Color(0xFFEEF0F2);
 
+  // colors regions
+  static const String colorStateAC = '#059142';
+  static const String colorStateAP = '#06a94d';
+  static const String colorStateAM = '#06c258';
+  static const String colorStatePA = '#07da63';
+  static const String colorStateRO = '#08f26e';
+  static const String colorStateRR = '#68BB59';
+  static const String colorStateTO = '#76BA1B';
+
+  static const String colorStateAL = '#F6C616';
+  static const String colorStateBA = '#F9E231';
+  static const String colorStateCE = '#FEF54F';
+  static const String colorStateMA = '#FFFF9F';
+  static const String colorStatePB = '#FFF700';
+  static const String colorStatePE = '#F7D214';
+  static const String colorStatePI = '#FAE11F';
+  static const String colorStateRN = '#FCF029';
+  static const String colorStateSE = '#FFFF33';
+
+  static const String colorStateGO = '#933b27';
+  static const String colorStateMT = '#b04632';
+  static const String colorStateMS = '#cf513d';
+
+  static const String colorStateDF = 'B83384';
+
+  static const String colorStateES = '#2154EE';
+  static const String colorStateMG = '#2A6FEA';
+  static const String colorStateRJ = '#3796DF';
+  static const String colorStateSP = '#41B9D4';
+
+  static const String colorStatePR = '#481391';
+  static const String colorStateRS = '#7436b4';
+  static const String colorStateSC = '#684299';
+
   // fonts
   static const double fontSizeCaption = 12;
   static const double fontSizeBody2 = 14;
