@@ -215,7 +215,7 @@ class CountryScreen extends StatelessWidget {
       GaugeSegment('MT', totalCasesInMT, color: charts.Color.fromHex(code: '#b04632')),
       GaugeSegment('MS', totalCasesInMS, color: charts.Color.fromHex(code: '#cf513d')),
       // df violet
-      GaugeSegment('DF', totalCasesInDF, color: charts.Color.fromHex(code: '#B83384')),
+      GaugeSegment('DF', totalCasesInDF, color: charts.Color.fromHex(code: '#4b0082')),
       // Southeast blue
       GaugeSegment('ES', totalCasesInES, color: charts.Color.fromHex(code: '#2154EE')),
       GaugeSegment('MG', totalCasesInMG, color: charts.Color.fromHex(code: '#2A6FEA')),
@@ -287,20 +287,16 @@ class CountryScreen extends StatelessWidget {
               child: Stack(
                 alignment: AlignmentDirectional.center,
                 children: <Widget>[
-                  SvgPicture.asset(
-                    Constants.svgBrazilMap,
-                    height: MediaQuery.of(context).size.width - 50,
-                  ),
+                  const Image(image: AssetImage(Constants.pngBrazilMap)),
                   Container(
                     height: MediaQuery.of(context).size.width - 182,
                     width: MediaQuery.of(context).size.width - 182,
                     child: charts.PieChart(_createGaugeData(),
                         animate: false,
                         defaultRenderer: charts.ArcRendererConfig(
-                            strokeWidthPx: 0,
-                            arcWidth: 30,
-                            startAngle: 4 / 5 * pi,
-                            arcLength: 7 / 5 * pi)),
+                          arcWidth: 60,
+                          strokeWidthPx: 0,
+                        )),
                   ),
                 ],
               ),

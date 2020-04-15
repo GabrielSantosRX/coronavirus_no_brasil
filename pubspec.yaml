@@ -41,6 +41,8 @@ dependencies:
   # Formatting
   diacritic: ^0.1.1
   intl: ^0.16.1 
+  # Markdown
+  flutter_markdown: ^0.3.4
 
 
 dev_dependencies:
