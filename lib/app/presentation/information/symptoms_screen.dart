@@ -3,8 +3,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 
 class SymptomsScreen extends StatelessWidget {
   static const String _markdownData = '''
-## Sobre a doença
-
+# Sobre a doença
+---
 
 
 ## O que é coronavírus?
@@ -42,6 +42,11 @@ A maioria das pessoas se infecta com os coronavírus comuns ao longo da vida, se
 | Não. Os médicos tratam os sintomas para evitar o agravamento da doença e reduzir o desconforto. |
 
 Fonte: https://coronavirus.saude.gov.br/
+
+
+
+
+.
 ''';
 
   final controller = ScrollController();
@@ -55,7 +60,6 @@ Fonte: https://coronavirus.saude.gov.br/
           controller: controller,
           selectable: true,
           data: _markdownData,
-          imageDirectory: 'https://raw.githubusercontent.com',
         ),
       ),
     );
