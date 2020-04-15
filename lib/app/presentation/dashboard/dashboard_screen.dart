@@ -64,22 +64,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: <Widget>[
               Cover(isKeyboardVisible: _isKeyboardVisible, context: context, scale: 0.25),
               Expanded(
-                child: Theme(
-                  data: ThemeData(
-                    accentColor: Constants.colorPrimary,
-                    cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.light),
-                  ),
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: _isKeyboardVisible ? 102 : 52, bottom: 32),
-                      child: Observer(
-                          builder: (_) => _isKeyboardVisible
-                              ? SearchScreen(citiesList: _dashboardController.citiesFiltered)
-                              : (null != _dashboardController.citySelected)
-                                  ? CityScreen(city: _dashboardController.citySelected)
-                                  : CountryScreen(citiesData: _dashboardController.citiesData)),
-                    ),
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: _isKeyboardVisible ? 102 : 52, bottom: 32),
+                    child: Observer(
+                        builder: (_) => _isKeyboardVisible
+                            ? SearchScreen(citiesList: _dashboardController.citiesFiltered)
+                            : (null != _dashboardController.citySelected)
+                                ? CityScreen(city: _dashboardController.citySelected)
+                                : CountryScreen(citiesData: _dashboardController.citiesData)),
                   ),
                 ),
               ),

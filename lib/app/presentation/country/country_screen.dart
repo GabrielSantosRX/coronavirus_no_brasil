@@ -294,7 +294,7 @@ class CountryScreen extends StatelessWidget {
                     child: charts.PieChart(_createGaugeData(),
                         animate: false,
                         defaultRenderer: charts.ArcRendererConfig(
-                          arcWidth: 60,
+                          arcWidth: 22,
                           strokeWidthPx: 0,
                         )),
                   ),

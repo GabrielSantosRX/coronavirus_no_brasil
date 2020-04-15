@@ -2,6 +2,7 @@ import 'package:coronavirus_no_brasil/app/presentation/splash/splash_screen.dart
 import 'package:coronavirus_no_brasil/app/presentation/startup_navigator/startup_navigator.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:coronavirus_no_brasil/injection_container.dart' as get_it;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -27,6 +28,8 @@ class _CoronavirusNoBrasilState extends State<CoronavirusNoBrasil> {
       title: Constants.appName,
       theme: ThemeData(
         primaryColor: Constants.colorPrimary,
+        accentColor: Constants.colorPrimary,
+        cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.light),
       ),
       initialRoute: Constants.splashScreen,
       routes: {

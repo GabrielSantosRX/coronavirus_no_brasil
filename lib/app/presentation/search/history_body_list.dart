@@ -34,7 +34,8 @@ class HistoryBodyList extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) => Padding(
                   padding: const EdgeInsets.all(8),
                   child: Container(
-                    height: 74,
+                    height: 60,
+                    alignment: AlignmentDirectional.center,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(6),
@@ -52,9 +53,6 @@ class HistoryBodyList extends StatelessWidget {
                             .body2
                             .copyWith(color: Constants.colorHeading),
                       ),
-                      subtitle:
-                          Text('${citiesList[index].totalCases} / ${citiesList[index].deaths}'),
-                      //trailing: (Platform.isIOS) ? Icon(Icons.arrow_forward_ios) : Icon(Icons.arrow_forward),
                       onTap: () {
                         print('selected ${citiesList[index]}');
                         _dashboardController.searchText = citiesList[index].cityQuery;
