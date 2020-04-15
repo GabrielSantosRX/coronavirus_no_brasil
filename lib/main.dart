@@ -19,11 +19,15 @@ class CoronavirusNoBrasil extends StatefulWidget {
 class _CoronavirusNoBrasilState extends State<CoronavirusNoBrasil> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
     return MaterialApp(
       title: Constants.appName,
+      theme: ThemeData(
+        primaryColor: Constants.colorPrimary,
+      ),
       initialRoute: Constants.splashScreen,
       routes: {
         Constants.splashScreen: (context) => const SplashScreen(),
