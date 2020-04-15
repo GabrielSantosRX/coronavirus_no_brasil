@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:coronavirus_no_brasil/app/models/city_model.dart';
 import 'package:coronavirus_no_brasil/app/presentation/dashboard/dashboard_screen.dart';
+import 'package:coronavirus_no_brasil/app/presentation/information/symptoms_screen.dart';
 import 'package:coronavirus_no_brasil/core/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _StartupNavigatorState extends State<StartupNavigator> {
     final List<CityModel> _citiesList = ModalRoute.of(context).settings.arguments;
 
     final _screens = <Widget>[
-      const Center(child: Text('Todo')),
+      SymptomsScreen(),
       DashboardScreen(
         citiesList: _citiesList,
       ),
